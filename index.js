@@ -25,22 +25,32 @@ function knightMoves(x, y) {
   moves.push([x - 1, y + 2]);
   moves.push([x - 1, y - 2]);
 
-  // Remove moves against the rules
+  const validMoves = [];
   moves.forEach((move, index) => {
-    move.forEach((num) => {
-      if (num < 0 || num > 7) {
-        console.log(`Move ${index + 1} is invalid!`);
-        moves.splice(index, 1);
-      }
-    });
+    if (move[0] < 0 || move[1] < 0 || move[0] > 7 || move[0] > 7) {
+      console.log(`Move ${index + 1} is invalid!`);
+      } else {
+      validMoves.push(move);
+      console.log(`Move ${index + 1} is valid!`);
+    }
   });
 
-  return moves;
+  return validMoves;
+
+  // Why is this not working? Strange forEach behaviour with splice method?
+
+  // moves.forEach((move, index) => {
+  //   if (move[0] < 0 || move[1] < 0 || move[0] > 7 || move[0] > 7) {
+  //     console.log(`Move ${index + 1} is invalid!`);
+  //     moves.splice(index, 1);
+  //     } else {
+  //     console.log(`Move ${index + 1} is valid!`);
+  //   }
+  // });
+
+  // return moves;
 }
 
-
-
-// Write a function to change position, test other cases during same run
 function setKnightPosition(x, y) {
   knightPosition.x = x;
   knightPosition.y = y;
@@ -56,6 +66,3 @@ console.log(knightMoves(knightPosition.x, knightPosition.y));
 setKnightPosition(0, 0);
 console.log("Testing moves for position 0-0")
 console.log(knightMoves(knightPosition.x, knightPosition.y));
-
-// TODO:
-// Works with 3,3 and 3,1, but not with 0,0... why?
