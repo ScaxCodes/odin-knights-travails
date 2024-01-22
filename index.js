@@ -38,9 +38,24 @@ function knightMoves(x, y) {
   return moves;
 }
 
-console.log(knightMoves(knightPosition.x, knightPosition.y));
+
 
 // Write a function to change position, test other cases during same run
+function setKnightPosition(x, y) {
+  knightPosition.x = x;
+  knightPosition.y = y;
+}
+
+console.log("Testing moves for position 3-3")
+console.log(knightMoves(knightPosition.x, knightPosition.y));
+
+setKnightPosition(3, 1);
+console.log("Testing moves for position 3-1")
+console.log(knightMoves(knightPosition.x, knightPosition.y));
+
+setKnightPosition(0, 0);
+console.log("Testing moves for position 0-0")
+console.log(knightMoves(knightPosition.x, knightPosition.y));
 
 // TODO:
 // Works with 3,3 and 3,1, but not with 0,0... why?
