@@ -1,3 +1,5 @@
+// TODO: Try out sets instead of array, just for practise
+
 let visitedChessFields = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
