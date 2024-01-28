@@ -1,5 +1,3 @@
-// TODO: Try out sets instead of array, just for practise
-
 let visitedChessFields = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -16,7 +14,7 @@ const knightPosition = { x: 3, y: 3 };
 console.log(`Knights position: ${knightPosition.x}, ${knightPosition.y}`);
 
 // Write a function that returns an array with all the possible moves from the knights current position
-function knightMoves(x, y) {
+function knightPossibleMoves(x, y) {
   const moves = [];
   moves.push([x + 2, y + 1]);
   moves.push([x + 2, y - 1]);
@@ -31,7 +29,7 @@ function knightMoves(x, y) {
   moves.forEach((move, index) => {
     if (move[0] < 0 || move[1] < 0 || move[0] > 7 || move[0] > 7) {
       console.log(`Move ${index + 1} is invalid!`);
-      } else {
+    } else {
       validMoves.push(move);
       console.log(`Move ${index + 1} is valid!`);
     }
@@ -53,18 +51,43 @@ function knightMoves(x, y) {
   // return moves;
 }
 
-function setKnightPosition(x, y) {
-  knightPosition.x = x;
-  knightPosition.y = y;
+// TODO: Write a func that checks if the array contains the target field
+// if yes, print result
+// if no, repeat knightPossiblemoves with all other fields from the array
+// link the moves via tree with up to 8 childs
+// TODO: Think about the data structure and search algorythm before going further
+
+function knightMoves(knightPosition, knightTarget) {
+  const possibleMoves = knightPossibleMoves(
+    knightPosition[0],
+    knightPosition[1]
+  );
+  for (field of possibleMoves) {
+    if (field[0] == knightTarget[0] && field[1] == knightTarget[1]) {
+      console.log("Target reached in one turn!");
+      console.log(knightPosition, knightTarget);
+      return;
+    }
+  }
+  console.log("1 turn was not enough, calculating next turn...");
 }
 
-console.log("Testing moves for position 3-3")
-console.log(knightMoves(knightPosition.x, knightPosition.y));
+knightMoves([3, 3], [5, 4]);
 
-setKnightPosition(3, 1);
-console.log("Testing moves for position 3-1")
-console.log(knightMoves(knightPosition.x, knightPosition.y));
+// TESTING
 
-setKnightPosition(0, 0);
-console.log("Testing moves for position 0-0")
-console.log(knightMoves(knightPosition.x, knightPosition.y));
+// function setKnightPosition(x, y) {
+//   knightPosition.x = x;
+//   knightPosition.y = y;
+// }
+
+// console.log("Testing moves for position 3-3");
+// console.log(knightPossibleMoves(knightPosition.x, knightPosition.y));
+
+// setKnightPosition(3, 1);
+// console.log("Testing moves for position 3-1");
+// console.log(knightPossibleMoves(knightPosition.x, knightPosition.y));
+
+// setKnightPosition(0, 0);
+// console.log("Testing moves for position 0-0");
+// console.log(knightPossibleMoves(knightPosition.x, knightPosition.y));
