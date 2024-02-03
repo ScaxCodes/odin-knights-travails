@@ -1,13 +1,31 @@
-let visitedChessFields = [
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-];
+// Not needed for the current solution
+// let visitedChessFields = [
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+// ];
+
+class Move {
+  constructor(x, y, prev = null) {
+    this.position = { x, y };
+    this.prev = prev;
+    this.next = [];
+  }
+}
+
+const tree = { 1: [] };
+
+// const test = new Move();
+// const test2 = new Move(2, 3);
+// const test3 = new Move(5, 5, test2);
+
+// console.log(test, test2, test3);
+// console.log(test3.prev.position.x);
 
 const knightPosition = { x: 3, y: 3 };
 
@@ -28,33 +46,30 @@ function knightPossibleMoves(x, y) {
   const validMoves = [];
   moves.forEach((move, index) => {
     if (move[0] < 0 || move[1] < 0 || move[0] > 7 || move[0] > 7) {
-      console.log(`Move ${index + 1} is invalid!`);
+      // console.log(`Move ${index + 1} is invalid!`);
     } else {
       validMoves.push(move);
-      console.log(`Move ${index + 1} is valid!`);
+      // console.log(`Move ${index + 1} is valid!`);
     }
   });
-
+  // console.log("Valid moves are:");
+  // console.log(validMoves);
   return validMoves;
+}
 
-  // Why is this not working? Strange forEach behaviour with splice method?
-
-  // moves.forEach((move, index) => {
-  //   if (move[0] < 0 || move[1] < 0 || move[0] > 7 || move[0] > 7) {
-  //     console.log(`Move ${index + 1} is invalid!`);
-  //     moves.splice(index, 1);
-  //     } else {
-  //     console.log(`Move ${index + 1} is valid!`);
-  //   }
-  // });
-
-  // return moves;
+function calcOneHeight(x, y) {
+  // TODO: not length, but how many properties
+  const currentLevel = tree.length;
+  console.log(currentLevel);
+  const possibleMoves = knightPossibleMoves(x, y);
+  console.log(possibleMoves);
 }
 
 // TODO: Write a func that checks if the array contains the target field
 // if yes, print result
 // if no, repeat knightPossiblemoves with all other fields from the array
 // link the moves via tree with up to 8 childs
+// remember to do many little functions instead of one big (single responsibility principle)
 // TODO: Think about the data structure and search algorythm before going further
 
 function knightMoves(knightPosition, knightTarget) {
@@ -72,9 +87,8 @@ function knightMoves(knightPosition, knightTarget) {
   console.log("1 turn was not enough, calculating next turn...");
 }
 
-knightMoves([3, 3], [5, 4]);
-
 // TESTING
+// knightMoves([3, 3], [5, 4]);
 
 // function setKnightPosition(x, y) {
 //   knightPosition.x = x;
