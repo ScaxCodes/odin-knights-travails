@@ -14,6 +14,7 @@ class Move {
   constructor(x, y, prev = null) {
     this.position = { x, y };
     this.prev = prev;
+    // .next could be an object with 8 positions and the bool prop validMove
     this.next = [];
   }
 }
@@ -28,6 +29,7 @@ const tree = { 1: [] };
 // console.log(test3.prev.position.x);
 
 const knightPosition = { x: 3, y: 3 };
+const knightTarget = { x: 7, y: 3 };
 
 console.log(`Knights position: ${knightPosition.x}, ${knightPosition.y}`);
 
@@ -57,12 +59,35 @@ function knightPossibleMoves(x, y) {
   return validMoves;
 }
 
-function calcOneHeight(x, y) {
-  // TODO: not length, but how many properties
-  const currentLevel = tree.length;
+function calcLevel(x, y) {
+  const currentLevel = Object.entries(tree).length;
   console.log(currentLevel);
-  const possibleMoves = knightPossibleMoves(x, y);
-  console.log(possibleMoves);
+  if (currentLevel == 1) {
+    const possibleMoves = knightPossibleMoves(x, y);
+    console.log(possibleMoves);
+    const root = new Move(x, y);
+    possibleMoves.forEach((move) => {
+      root.next.push(move);
+    });
+    console.log(root);
+    tree[1].push(root);
+  } else {
+  }
+}
+
+calcLevel(3, 3);
+searchTarget();
+
+function searchTarget() {
+  const currentLevel = parseInt(Object.entries(tree).length);
+  for (field of tree[currentLevel][0].next) {
+    if (field[0] == knightTarget.x && field[1] == knightTarget.y) {
+      console.log(`Target reached in ${currentLevel} turn!`);
+      return;
+    }
+  }
+  console.log(`${currentLevel} turn was not enough, calculating next turn...`);
+  tree[currentLevel + 1] = [];
 }
 
 // TODO: Write a func that checks if the array contains the target field
@@ -72,20 +97,20 @@ function calcOneHeight(x, y) {
 // remember to do many little functions instead of one big (single responsibility principle)
 // TODO: Think about the data structure and search algorythm before going further
 
-function knightMoves(knightPosition, knightTarget) {
-  const possibleMoves = knightPossibleMoves(
-    knightPosition[0],
-    knightPosition[1]
-  );
-  for (field of possibleMoves) {
-    if (field[0] == knightTarget[0] && field[1] == knightTarget[1]) {
-      console.log("Target reached in one turn!");
-      console.log(knightPosition, knightTarget);
-      return;
-    }
-  }
-  console.log("1 turn was not enough, calculating next turn...");
-}
+// function knightMoves(knightPosition, knightTarget) {
+//   const possibleMoves = knightPossibleMoves(
+//     knightPosition[0],
+//     knightPosition[1]
+//   );
+//   for (field of possibleMoves) {
+//     if (field[0] == knightTarget[0] && field[1] == knightTarget[1]) {
+//       console.log("Target reached in one turn!");
+//       console.log(knightPosition, knightTarget);
+//       return;
+//     }
+//   }
+//   console.log("1 turn was not enough, calculating next turn...");
+// }
 
 // TESTING
 // knightMoves([3, 3], [5, 4]);
