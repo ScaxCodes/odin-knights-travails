@@ -1,3 +1,6 @@
+// TODO: Nochmal neu konzeptionieren von vorne mit Pseudecode und data structures
+// dann Lösung anschauen, dann nochmal nachbauen, alternativ chatgpt fragen a la CC
+
 // Not needed for the current solution
 // let visitedChessFields = [
 //   [0, 0, 0, 0, 0, 0, 0, 0],
