@@ -105,15 +105,15 @@ console.log(knightPossibleMoves(3, 3)); // Expected: [[5, 4], [5, 2], [1, 4], [1
 const start = new Move(3, 3);
 const target = { x: 7, y: 3 };
 
-console.log("Testing shortestPath:");
-console.log("Start field:", start);
-console.log("Target field:", target);
-console.log("Shortest path:", shortestPath(start, target)); // Expected: Shortest path as an array of field coordinates
+// console.log("Testing shortestPath:");
+// console.log("Start field:", start);
+// console.log("Target field:", target);
+// console.log("Shortest path:", shortestPath(start, target)); // Expected: Shortest path as an array of field coordinates
 
-start.x = 0;
-start.y = 0;
-target.x = 7;
-target.y = 7;
+// start.x = 0;
+// start.y = 0;
+// target.x = 7;
+// target.y = 7;
 
 console.log("Testing shortestPath:");
 console.log("Start field:", start);
